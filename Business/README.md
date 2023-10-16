@@ -16,6 +16,6 @@ That's it—you now have a fully Dockerized Django project running..
 
 # Note: 
 `entypoint.sh` will create super_user and load some data to DB.
-username: admin
-pasword: adminpass
+`username`: admin
+`password`: adminpass
 
