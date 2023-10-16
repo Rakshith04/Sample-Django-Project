@@ -6,6 +6,7 @@ This is a basic Django web app running on Docker. It has CRUD operations along w
 1. Change directory to `Business`: `$ cd Business`
 2. Build the Docker image: `$ docker build -t <imagename> .`
 3. Run the Docker image you just created: `$ docker run -d -p 8000:8000 <imagename>`
+4. Goto `localhost:8000` in browser to access the web page
 
 That's it—you now have a fully Dockerized Django project running..
 
