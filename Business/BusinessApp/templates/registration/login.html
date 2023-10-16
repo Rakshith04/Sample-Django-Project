@@ -1,0 +1,33 @@
+{% extends "base.html"%}
+
+{%block content%}
+{% if form.errors %}
+<p style="color: white;">Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p style="color: white;">Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p style="color: white;">Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+  <div class="center">
+	  <form method="post" class="card" novalidate>
+	  	{% csrf_token %}
+	    <h2 class="text-center">Log in to your account</h2>
+		{% for field in form %}
+	    		{{ field.label_tag }} 
+	        	{{ field }}
+	        	{% if field.errors %}
+	        		<small>{{ field.errors|striptags }}</small> 
+	        	{% endif %}
+		{% endfor %}
+		
+		<input type="submit" value="Login" class="btn btn-primary full-width">
+		<hr>
+	</form>
+</div>
+
+{%endblock content%}

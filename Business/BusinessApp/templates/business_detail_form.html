@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
+  <form action={% url 'search' %} method="GET" name="search">
+  
+    <div class="input-group mb-3">
+      <input type="text" class=""
+      placeholder="Enter search deatails"
+      name="search" {% if request.GET.search %}  value="{{request.GET.search}}" {% endif %} required>
+      <div class="input-group-append">
+        <button style="color: blue;" class="fa fa-search"  type="button">search</button>
+    </div>
+    </div>
+</form>
+      <ul class="list-group">
+        {% for i in business %}
+        <li class="list-group-item">
+          <p><b>Company Name</b> - <a href="{% url 'update' pk=i.id %}">{{i.organisation_name}}</a></p>
+          <p><b>Address</b> - {{i.address}}</p>
+          <p><b>Owner</b> - {{i.owner_info}}</p>
+          <p><b>Employee Size</b> - {{i.employee_size}}</p>
+          <a href="{% url 'delete' pk=i.id %}" class="btn btn-danger" role="button"> <i class="fa fa-trash"> Delete</i></a>
+          </li>
+          
+          {% empty %}
+          <li class="list-group-item">
+            
+            <p>No Data Found</p>
+          </li>
+          
+        {% endfor %}
+      </ul>
+      <div class="pagination" >
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+  {% endblock %}
